@@ -25,6 +25,7 @@ func NumberOfOverlappingSquares(input string) int {
 func FirstNonOverlappingRectangle(input string) string {
 	rectangles := parseInput(input)
 
+	// how many times is each point "visited"/"touched" by all rectangles
 	visitedPoints := make(map[point]int)
 	for _, v := range rectangles {
 		addRectangle(v, visitedPoints)
@@ -67,6 +68,7 @@ func parseInput(input string) []rectangle {
 	return rectangles
 }
 
+// return true if all points inside a rectangle were only visited once
 func areaOnlyVisitedOnce(r rectangle, visited map[point]int) bool {
 	for x := r.start.x; x < r.start.x+r.width; x++ {
 		for y := r.start.y; y < r.start.y+r.height; y++ {
@@ -80,6 +82,7 @@ func areaOnlyVisitedOnce(r rectangle, visited map[point]int) bool {
 }
 
 func overlappingPoints(r []rectangle) int {
+	// how many times is each point "visited"/"touched" by all rectangles
 	visitedPoints := make(map[point]int)
 	for _, v := range r {
 		addRectangle(v, visitedPoints)
